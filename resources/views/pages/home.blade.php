@@ -64,38 +64,35 @@
     </section>
 
     <!-- 2. STATS COUNTER -->
-    <section class="py-24 bg-dark-400 border-y border-white/5 relative overflow-hidden" x-data="{
-        stats: [
-            { id: 'bookings', value: 10000, suffix: 'K+', label: 'BOOKINGS', icon: 'fa-check-circle' },
-            { id: 'artists', value: 5000, suffix: 'K+', label: 'ARTISTS', icon: 'fa-microphone' },
-            { id: 'talents', value: 2000, suffix: 'K+', label: 'TALENTS', icon: 'fa-user-check' },
-            { id: 'events', value: 500, suffix: '+', label: 'EVENTS', icon: 'fa-calendar-day' }
-        ]
-    }">
+    <section class="py-24 transition-colors duration-500" :class="darkMode ? 'bg-dark-400' : 'bg-gray-100'">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-black mb-16 italic uppercase tracking-tighter"><span class="text-primary-600">BONGOCASTING</span> IN NUMBERS</h2>
+            <h2 class="text-3xl font-black mb-16 uppercase tracking-tighter transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'"><span class="text-primary-600">BONGOCASTING</span> IN NUMBERS</h2>
             
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                <template x-for="stat in stats" :key="stat.id">
-                    <div class="stat-item group p-8 rounded-3xl glass border border-white/5 hover:border-primary-600/30 transition-all duration-500">
+                @php
+                    $stats = [
+                        ['id' => 'bookings', 'value' => 10000, 'suffix' => 'K+', 'label' => 'BOOKINGS', 'icon' => 'fa-check-circle'],
+                        ['id' => 'artists', 'value' => 5000, 'suffix' => 'K+', 'label' => 'ARTISTS', 'icon' => 'fa-microphone'],
+                        ['id' => 'talents', 'value' => 2000, 'suffix' => 'K+', 'label' => 'TALENTS', 'icon' => 'fa-user-check'],
+                        ['id' => 'events', 'value' => 500, 'suffix' => '+', 'label' => 'EVENTS', 'icon' => 'fa-calendar-day']
+                    ];
+                @endphp
+                @foreach($stats as $stat)
+                    <div class="stat-item group p-8 rounded-3xl border transition-all duration-500" :class="darkMode ? 'glass border-white/5 hover:border-primary-600/30' : 'bg-white border-black/5 hover:border-primary-600/30 shadow-sm'">
                         <div class="flex justify-between items-start mb-6">
-                            <i class="fas text-3xl text-primary-600 group-hover:scale-110 transition-transform" :class="stat.icon"></i>
+                            <i class="fas text-3xl text-primary-600 group-hover:scale-110 transition-transform {{ $stat['icon'] }}"></i>
                         </div>
-                        <div class="text-4xl md:text-5xl font-black text-white mb-2" x-text="stat.value.toLocaleString() + stat.suffix">0</div>
-                        <div class="text-white/40 text-sm font-bold tracking-widest" x-text="stat.label">LABEL</div>
+                        <div class="text-4xl md:text-5xl font-black mb-2 transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'">{{ number_format($stat['value']) . $stat['suffix'] }}</div>
+                        <div class="text-[10px] font-bold tracking-widest uppercase" :class="darkMode ? 'text-white/40' : 'text-black/40'">{{ $stat['label'] }}</div>
                     </div>
-                </template>
+                @endforeach
             </div>
 
-            <div class="mt-16 flex items-center justify-center space-x-4 text-white/60">
+            <div class="mt-16 flex items-center justify-center space-x-4">
                 <div class="flex text-primary-600">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
-                <span class="font-bold italic text-lg uppercase tracking-tighter">4.8/5 Average Rating from 3,000+ Reviews</span>
+                <span class="font-bold text-lg uppercase tracking-tighter transition-colors duration-500" :class="darkMode ? 'text-white/60' : 'text-black/60'">4.8/5 Average Rating from 3,000+ Reviews</span>
             </div>
         </div>
     </section>
@@ -109,32 +106,25 @@
                     <p class="font-bold tracking-widest uppercase text-[10px] transition-colors duration-500" :class="darkMode ? 'text-white/40' : 'text-black/40'">Elite professionals from Tanzania</p>
                 </div>
                 <a href="/talents" class="group flex items-center space-x-2 bg-primary-600/10 hover:bg-primary-600 px-6 py-3 rounded-xl transition-all duration-300">
-                    <span class="font-black uppercase text-[10px] tracking-widest transition-colors duration-300 group-hover:text-white" :class="darkMode ? 'text-white' : 'text-black'">View All</span>
-                    <x-iconsax icon="arrow-right-up" size="14" class="transform rotate-45 transition-colors duration-300 group-hover:text-white" :color="darkMode ? '#ffffff' : '#000000'" />
+                    <span class="font-black uppercase text-[10px] tracking-widest transition-colors duration-300 group-hover:text-white" :class="darkMode ? 'text-white' : 'text-black'">{{ __('Ona Vyote') }}</span>
+                    <x-iconsax icon="arrow-right-up" size="14" class="transform rotate-45 transition-colors duration-300 group-hover:text-white" color="currentColor" />
                 </a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach(range(1, 4) as $index)
-                <div class="group relative bg-[var(--card-bg)] border border-[var(--border-color)] rounded-[2rem] p-3 transition-all duration-500 hover:border-primary-600/30 overflow-hidden">
-                    <!-- Image Wrapper -->
+                <div class="group relative rounded-[2rem] p-3 transition-all duration-500 border overflow-hidden" :class="darkMode ? 'bg-dark-400 border-white/5 hover:border-primary-600/30 shadow-2xl' : 'bg-gray-50 border-black/5 hover:border-primary-600/30 shadow-sm'">
                     <div class="relative aspect-square rounded-[1.5rem] overflow-hidden mb-5">
                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Featured{{ $index }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Talent">
-                        
-                        <!-- Premium Badge -->
                         <div class="absolute top-3 right-3 z-20">
                             <div class="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[8px] font-black text-white tracking-widest uppercase">PRO</div>
                         </div>
-
-                        <!-- Hover Action Button -->
                         <div class="absolute inset-0 z-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/20 backdrop-blur-[2px]">
                             <button class="btn-primary px-6 py-2.5 rounded-full text-[10px] font-black tracking-[0.2em] shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 uppercase">
                                 BOOK NOW
                             </button>
                         </div>
                     </div>
-
-                    <!-- Content -->
                     <div class="px-2 pb-2">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-black uppercase tracking-tight transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'">JOHNSON {{ $index }}</h3>
@@ -143,7 +133,6 @@
                                 <span class="ml-1 text-[10px] font-black">4.9</span>
                             </div>
                         </div>
-                        
                         <div class="flex items-center justify-between mt-4">
                             <div class="flex items-center text-primary-600/60">
                                 <x-iconsax icon="music" size="14" />
@@ -334,6 +323,114 @@
             
             <div class="mt-16 text-center">
                 <a href="/jobs" class="text-primary-600 font-black text-sm hover:underline uppercase tracking-[0.3em]">VIEW ALL OPENINGS <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. WHY CHOOSE US -->
+    <section class="py-24 transition-colors duration-500" :class="darkMode ? 'bg-dark-400' : 'bg-gray-100'">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-black mb-20 uppercase tracking-tighter transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'"><span class="text-primary-600">WHY</span> BONGOCASTING?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @php
+                    $features = [
+                        ['title' => 'SECURE PAYMENTS', 'desc' => 'M-Pesa, Tigo Pesa, Airtel Money supported.', 'icon' => 'fa-lock'],
+                        ['title' => 'FAST BOOKING', 'desc' => 'Book your favorite talent in under 5 minutes.', 'icon' => 'fa-bolt-lightning'],
+                        ['title' => 'DIGITAL CONTRACTS', 'desc' => 'Legally binding contracts signed online.', 'icon' => 'fa-file-signature'],
+                        ['title' => 'COUNTRY-WIDE', 'desc' => 'Access talents across all 26 regions of TZ.', 'icon' => 'fa-earth-africa'],
+                        ['title' => 'VERIFIED PROFILES', 'desc' => 'We manually verify every professional profile.', 'icon' => 'fa-circle-check'],
+                        ['title' => 'ACCOMMODATION', 'desc' => 'Book hotels for traveling talents instantly.', 'icon' => 'fa-hotel'],
+                    ];
+                @endphp
+
+                @foreach($features as $f)
+                <div class="p-10 rounded-3xl border transition-all duration-500 text-left group" :class="darkMode ? 'glass border-white/5 hover:bg-white/5' : 'bg-white border-black/5 hover:border-primary-600/30 shadow-sm'">
+                    <div class="w-14 h-14 rounded-2xl bg-primary-600/10 border border-primary-600/20 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-primary-600 transition-all duration-500">
+                        <i class="fas {{ $f['icon'] }} text-2xl text-primary-600 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-black mb-4 uppercase tracking-tighter transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'">{{ $f['title'] }}</h3>
+                    <p class="font-medium leading-relaxed transition-colors duration-500" :class="darkMode ? 'text-white/50' : 'text-black/50'">{{ $f['desc'] }}</p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. TOP ARTISTS -->
+    <section class="py-24 transition-colors duration-500" :class="darkMode ? 'bg-black' : 'bg-white'">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-black mb-16 uppercase tracking-tighter transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'"><span class="text-primary-600">TOP ARTISTS</span> & PRODUCERS</h2>
+            
+            <div class="flex flex-wrap justify-center gap-12">
+                @php
+                    $topArtists = [
+                        ['name' => 'DIAMOND', 'jobs' => '15+', 'img' => '🎤'],
+                        ['name' => 'RAYVANNY', 'jobs' => '23+', 'img' => '🎬'],
+                        ['name' => 'ZUCHU', 'jobs' => '10+', 'img' => '🎵'],
+                        ['name' => 'KANZI', 'jobs' => '8+', 'img' => '🎥'],
+                        ['name' => 'WCB WASAFI', 'jobs' => '50+', 'img' => '🎪'],
+                    ];
+                @endphp
+
+                @foreach($topArtists as $artist)
+                <div class="group cursor-pointer">
+                    <div class="w-32 h-32 rounded-3xl border transition-all duration-500 flex flex-col items-center justify-center mb-6 relative" :class="darkMode ? 'bg-dark-400 border-white/5 group-hover:border-primary-600' : 'bg-gray-100 border-black/5 group-hover:border-primary-600 shadow-sm'">
+                        <span class="text-4xl font-black text-primary-600 transition-transform duration-500 group-hover:scale-110">{{ $artist['img'] }}</span>
+                        <div class="absolute -bottom-2 bg-primary-600 text-white text-[9px] font-black px-3 py-1 rounded-lg tracking-widest">{{ $artist['jobs'] }} JOBS</div>
+                    </div>
+                    <h4 class="font-black text-xs uppercase tracking-widest transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'">{{ $artist['name'] }}</h4>
+                </div>
+                @endforeach
+            </div>
+
+            <button class="mt-20 btn btn-outline border-primary-600 text-primary-600 px-10 py-4 font-black uppercase tracking-widest text-xs hover:bg-primary-600 hover:text-white transition-all">BECOME AN ARTIST</button>
+        </div>
+    </section>
+
+    <!-- 10. UPCOMING EVENTS -->
+    <section class="py-24 transition-colors duration-500" :class="darkMode ? 'bg-dark-400' : 'bg-gray-100'">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-black mb-16 uppercase tracking-tighter transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'"><span class="text-primary-600">UPCOMING</span> EVENTS</h2>
+            
+            <div class="rounded-[2.5rem] border overflow-hidden transition-all duration-500" :class="darkMode ? 'glass border-white/5' : 'bg-white border-black/5 shadow-sm'">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead :class="darkMode ? 'bg-black/40' : 'bg-gray-50'">
+                            <tr>
+                                <th class="px-8 py-6 font-black uppercase tracking-[0.2em] text-[10px]" :class="darkMode ? 'text-white/40' : 'text-black/40'">Event Name</th>
+                                <th class="px-8 py-6 font-black uppercase tracking-[0.2em] text-[10px]" :class="darkMode ? 'text-white/40' : 'text-black/40'">Date</th>
+                                <th class="px-8 py-6 font-black uppercase tracking-[0.2em] text-[10px]" :class="darkMode ? 'text-white/40' : 'text-black/40'">Location</th>
+                                <th class="px-8 py-6 font-black uppercase tracking-[0.2em] text-[10px] text-center" :class="darkMode ? 'text-white/40' : 'text-black/40'">Needed</th>
+                                <th class="px-8 py-6 font-black uppercase tracking-[0.2em] text-[10px] text-right" :class="darkMode ? 'text-white/40' : 'text-black/40'">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y font-medium transition-colors duration-500" :class="darkMode ? 'divide-white/5' : 'divide-black/5'">
+                            @php
+                                $events = [
+                                    ['name' => 'Sauti za Busara', 'date' => 'Feb 10-12', 'loc' => 'Zanzibar', 'need' => '25+', 'color' => 'from-primary-600 to-primary-400'],
+                                    ['name' => 'EA Fashion Week', 'date' => 'Mar 5', 'loc' => 'Arusha', 'need' => '15+', 'color' => 'from-blue-600 to-blue-400'],
+                                    ['name' => 'Bongo Flava Awards', 'date' => 'Apr 20', 'loc' => 'Dar es Salaam', 'need' => '30+', 'color' => 'from-purple-600 to-purple-400'],
+                                ];
+                            @endphp
+
+                            @foreach($events as $event)
+                            <tr class="transition-colors group hover:bg-primary-600/[0.02]">
+                                <td class="px-8 py-8">
+                                    <div class="text-xl font-black uppercase tracking-tighter transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'">{{ $event['name'] }}</div>
+                                    <div class="w-full max-w-[200px] h-1 bg-white/5 mt-3 overflow-hidden rounded-full">
+                                        <div class="h-full bg-gradient-to-r {{ $event['color'] }} group-hover:w-full transition-all duration-1000 w-1/3"></div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-8 font-black text-sm transition-colors duration-500" :class="darkMode ? 'text-white/60' : 'text-black/60'">{{ $event['date'] }}</td>
+                                <td class="px-8 py-8 font-black uppercase tracking-tighter text-sm transition-colors duration-500" :class="darkMode ? 'text-white' : 'text-black'">{{ $event['loc'] }}</td>
+                                <td class="px-8 py-8 text-center"><span class="px-4 py-2 rounded-xl bg-primary-600/10 font-black text-primary-600 border border-primary-600/20 text-xs">{{ $event['need'] }}</span></td>
+                                <td class="px-8 py-8 text-right"><button class="btn btn-primary text-[10px] py-3 px-8 rounded-full font-black italic tracking-widest shadow-none">DETAILS</button></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>

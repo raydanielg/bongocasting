@@ -1,0 +1,141 @@
+<?php
+
+declare(strict_types=1);
+
+namespace RPWebDevelopment\LaravelTranslate\Contracts;
+
+use Symfony\Component\Console\Helper\ProgressBar;
+
+abstract class Translate
+{
+    protected array $files = [];
+    protected array $targets = [];
+    protected array $existing = [];
+    public ProgressBar $progressBar;
+    protected array $existingValues = [];
+    protected string $sourceLanguage = '';
+    protected string $targetLanguage = '';
+    protected string $formality = 'more_formal';
+
+    public const REPLACE_FORMAT = '+VAR%sVAR+';
+    public const REVERSE_FORMAT = '/\+VAR(.*?)VAR\+/';
+    public const MATCH_INT = 1;
+
+    public abstract function translate(
+        string $string,
+        string $targetLang,
+        string $sourceLang = 'en_GB'
+    ): ?string;
+
+    public function reader(
+        Reader $reader,
+        array $targetLocale,
+        string $sourceLang,
+        ProgressBar $progress
+    ): array {
+        $this->files = $reader->getFiles();
+        $this->targets = $reader->getTargets();
+        $this->existing = $reader->getExisting();
+        $this->progressBar = $progress;
+        $this->sourceLanguage = $sourceLang;
+        $this->targetLanguage = $targetLocale['lang'];
+        $this->setFormality($targetLocale);
+
+        (empty($this->existing))
+            ? $this->defaultProcessReader()
+            : $this->missingOnlyProcessReader();
+
+        return $this->targets;
+    }
+
+    private function defaultProcessReader(): void
+    {
+        $this->progressBar->setMessage("[{$this->targetLanguage}] Translating values");
+        $this->progressBar->start(count($this->targets, 1));
+
+        array_walk_recursive($this->targets, [$this, 'processArray']);
+
+        $this->progressBar->finish();
+    }
+
+    private function missingOnlyProcessReader(): void
+    {
+        $this->progressBar->setMessage("[{$this->targetLanguage}] Translating values");
+        $this->progressBar->start(count($this->files, 1));
+
+        foreach ($this->files as $targetFile) {
+            $this->processMissing($this->targets[$targetFile], $this->existing[$targetFile]);
+            $this->progressBar->advance();
+        }
+
+        $this->progressBar->finish();
+    }
+
+    private function processArray(&$value): void
+    {
+        $value = $this->translateString($value);
+        $this->progressBar->advance();
+    }
+
+    private function processMissing(&$target, $source): void
+    {
+        foreach ($target as $key => $value) {
+            if (is_array($value)) {
+                $source[$key] = $source[$key] ?? [];
+                $this->processMissing($target[$key], $source[$key] ?? []);
+
+                continue;
+            }
+
+            if (isset($source[$key]) && !empty($source[$key])) {
+                $target[$key] = $source[$key];
+
+                continue;
+            }
+
+            if (isset($target[$key]) && $target[$key] && (!isset($source[$key]) || empty($source[$key]))) {
+                $target[$key] = $this->translateString($target[$key]);
+            }
+        }
+    }
+
+    private function translateString(string $string): string
+    {
+        $value = $this->cleanAttributes($string);
+        $value = $this->translate($value, $this->targetLanguage, $this->sourceLanguage);
+
+        return $this->restoreAttributes($value);
+    }
+
+    private function cleanAttributes(string $value): string
+    {
+        return preg_replace_callback(
+            '/\:[a-zA-Z0-9_-]*/',
+            fn ($matches) => sprintf(
+                $this::REPLACE_FORMAT,
+                ltrim($matches[0], ':')
+            ),
+            $value
+        );
+    }
+
+    private function restoreAttributes(string $value): string
+    {
+        $restore = preg_replace_callback(
+            $this::REVERSE_FORMAT,
+            fn ($matches) => sprintf(':%s', $matches[$this::MATCH_INT]),
+            $value
+        );
+
+        return str_replace(
+            [
+                ' <template translate=no></template>',
+                '<template translate=no></template>',
+                ' <template translate=no>',
+                '</template> :'
+            ],
+            ':',
+            $restore
+        );
+    }
+}
