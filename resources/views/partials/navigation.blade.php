@@ -15,20 +15,32 @@
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center space-x-8">
-                <a href="/" class="nav-link @if(request()->routeIs('home')) nav-link-active @endif">Nyumbani</a>
-                <a href="/talents" class="nav-link @if(request()->routeIs('talents.*')) nav-link-active @endif">Talents</a>
-                <a href="/artists" class="nav-link @if(request()->routeIs('artists.*')) nav-link-active @endif">Artists</a>
+                <a href="/" class="nav-link @if(request()->routeIs('home')) nav-link-active @endif">{{ __('Nyumbani') }}</a>
+                <a href="/talents" class="nav-link @if(request()->routeIs('talents.*')) nav-link-active @endif">{{ __('Talents') }}</a>
+                <a href="/artists" class="nav-link @if(request()->routeIs('artists.*')) nav-link-active @endif">{{ __('Artists') }}</a>
                 
+                <!-- Language Switcher -->
+                <div class="flex items-center space-x-2 bg-white/5 rounded-lg p-1 border border-white/10">
+                    <a href="{{ route('lang.switch', 'en') }}" 
+                       class="px-2 py-1 text-xs rounded-md transition-all {{ app()->getLocale() == 'en' ? 'bg-primary-600 text-white' : 'text-white/60 hover:text-white' }}">
+                        EN
+                    </a>
+                    <a href="{{ route('lang.switch', 'sw') }}"
+                       class="px-2 py-1 text-xs rounded-md transition-all {{ app()->getLocale() == 'sw' ? 'bg-primary-600 text-white' : 'text-white/60 hover:text-white' }}">
+                        SW
+                    </a>
+                </div>
+
                 <!-- Dark Mode Toggle -->
                 <button @click="darkMode = !darkMode" class="p-2 rounded-lg hover:bg-primary-600/10 transition-colors">
                     <i class="fas" :class="darkMode ? 'fa-sun text-yellow-400' : 'fa-moon text-gray-600'"></i>
                 </button>
 
                 @auth
-                    <a href="/admin" class="btn btn-primary py-2 px-5 text-sm">Dashboard</a>
+                    <a href="/admin" class="btn btn-primary py-2 px-5 text-sm">{{ __('Dashboard') }}</a>
                 @else
-                    <a href="/login" class="nav-link">Ingia</a>
-                    <a href="/register" class="btn btn-primary py-2 px-5 text-sm">Jisajili</a>
+                    <a href="/login" class="nav-link">{{ __('Ingia') }}</a>
+                    <a href="/register" class="btn btn-primary py-2 px-5 text-sm">{{ __('Jisajili') }}</a>
                 @endauth
             </div>
 

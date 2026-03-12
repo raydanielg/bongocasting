@@ -7,14 +7,14 @@
     <section class="hero-section">
         <div class="hero-overlay"></div>
         <div class="hero-content relative" x-data="{}" x-init="gsap.from($el, { opacity: 0, y: 50, duration: 1.5, ease: 'power4.out' })">
-            <span class="badge-primary mb-6 inline-block">Tanzania's #1 Casting Platform</span>
-            <h1 class="mb-8 font-heading">Gundua Vipaji Bora <br> <span class="text-primary-600">vya Kitanzania</span></h1>
+            <span class="badge-primary mb-6 inline-block">{{ __('Tanzania\'s #1 Casting Platform') }}</span>
+            <h1 class="mb-8 font-heading">{{ __('Gundua Vipaji Bora') }} <br> <span class="text-primary-600">{{ __('vya Kitanzania') }}</span></h1>
             <p class="text-xl opacity-80 mb-12 max-w-2xl mx-auto">
-                Tunakuunganisha na waigizaji, wanamitindo, na wasanii bora kwa ajili ya miradi yako ya filamu, matangazo na burudani.
+                {{ __('Tunakuunganisha na waigizaji, wanamitindo, na wasanii bora') }} kwa ajili ya miradi yako ya filamu, matangazo na burudani.
             </p>
             <div class="flex flex-wrap items-center justify-center gap-6">
-                <a href="/talents" class="btn btn-primary text-lg">Tafuta Vipaji</a>
-                <a href="/register" class="btn btn-outline text-lg">Jiunge Kama Talent</a>
+                <a href="/talents" class="btn btn-primary text-lg">{{ __('Tafuta Vipaji') }}</a>
+                <a href="/register" class="btn btn-outline text-lg">{{ __('Jiunge Kama Talent') }}</a>
             </div>
         </div>
     </section>
@@ -25,11 +25,11 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="stat-item text-center">
                     <span class="stat-number">5K+</span>
-                    <span class="stat-label">Vipaji</span>
+                    <span class="stat-label">{{ __('Vipaji') }}</span>
                 </div>
                 <div class="stat-item text-center">
                     <span class="stat-number">200+</span>
-                    <span class="stat-label">Wasanii</span>
+                    <span class="stat-label">{{ __('Wasanii') }}</span>
                 </div>
                 <div class="stat-item text-center">
                     <span class="stat-number">1.2K+</span>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="stat-item text-center">
                     <span class="stat-number">50+</span>
-                    <span class="stat-label">Makampuni</span>
+                    <span class="stat-label">{{ __('Makampuni') }}</span>
                 </div>
             </div>
         </div>
@@ -48,11 +48,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-end mb-12">
                 <div>
-                    <h2 class="mb-4">Vipaji Vinavyovuma</h2>
-                    <p class="text-white/60">Baadhi ya vipaji bora vilivyopata kura nyingi wiki hii.</p>
+                    <h2 class="mb-4">{{ __('Vipaji Vinavyovuma') }}</h2>
+                    <p class="text-white/60">{{ __('Baadhi ya vipaji bora vilivyopata kura nyingi wiki hii.') }}</p>
                 </div>
                 <a href="/talents" class="text-primary-600 font-semibold hover:underline flex items-center space-x-2">
-                    <span>Ona Vyote</span>
+                    <span>{{ __('Ona Vyote') }}</span>
                     <i class="fas fa-arrow-right text-sm"></i>
                 </a>
             </div>
