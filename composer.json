@@ -14,7 +14,9 @@
         "laravel/socialite": "^5.25",
         "laravel/tinker": "^2.10.1",
         "nwidart/laravel-modules": "^12.0",
-        "spatie/laravel-permission": "^6.24"
+        "rpwebdevelopment/laravel-translate": "*",
+        "spatie/laravel-permission": "^6.24",
+        "spatie/laravel-translatable": "^6.11"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^4.1",
@@ -31,6 +33,12 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Modules\\Core\\": "Modules/Core/app/",
+            "Modules\\Talent\\": "Modules/Talent/app/",
+            "Modules\\Booking\\": "Modules/Booking/app/",
+            "Modules\\Payment\\": "Modules/Payment/app/",
+            "Modules\\Contract\\": "Modules/Contract/app/",
+            "Modules\\Review\\": "Modules/Review/app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }

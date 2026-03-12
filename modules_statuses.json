@@ -1,0 +1,8 @@
+{
+    "Core": true,
+    "Talent": true,
+    "Booking": true,
+    "Payment": true,
+    "Contract": true,
+    "Review": true
+}
