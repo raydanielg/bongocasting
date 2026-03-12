@@ -15,14 +15,16 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 <body class="font-sans antialiased transition-colors duration-300" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))" :class="{ 'dark': darkMode }">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[var(--bg-main)]">
-            <div>
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-[var(--bg-main)] bg-mesh">
+            <div class="mb-8">
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <span class="text-4xl font-heading font-extrabold tracking-tighter italic">
+                        <span class="text-primary-600">BONGO</span><span class="dark:text-white text-black">CASTING</span>
+                    </span>
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 glass shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-md mt-6 px-8 py-10 glass-card shadow-2xl overflow-hidden sm:rounded-[2rem] border border-white/10">
                 {{ $slot }}
             </div>
         </div>

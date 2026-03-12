@@ -1,67 +1,76 @@
-<footer class="bg-dark-400 border-t border-white/10 pt-20 pb-10">
+<footer class="bg-black border-t border-white/5 pt-24 pb-12 overflow-hidden relative">
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-primary-600/5 blur-[100px] -z-10"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
             <!-- Brand -->
-            <div class="space-y-6">
-                <a href="/" class="text-2xl font-heading font-extrabold tracking-tighter italic">
+            <div class="space-y-8">
+                <a href="/" class="text-3xl font-heading font-black tracking-tighter italic">
                     <span class="text-primary-600">BONGO</span>CASTING
                 </a>
-                <p class="text-white/60 leading-relaxed">
-                    Platform namba moja Tanzania kwa ajili ya kutafuta na kupata vipaji (Talents) na wasanii bora kwa ajili ya miradi yako ya kitalu.
+                <p class="text-white/50 leading-relaxed font-medium">
+                    Tanzania's Premier Talent Platform connecting elite artists with world-class opportunities.
                 </p>
                 <div class="flex space-x-4">
-                    <a href="#" class="btn-icon hover:text-primary-600"><i class="fab fa-instagram text-xl"></i></a>
-                    <a href="#" class="btn-icon hover:text-primary-600"><i class="fab fa-tiktok text-xl"></i></a>
-                    <a href="#" class="btn-icon hover:text-primary-600"><i class="fab fa-youtube text-xl"></i></a>
-                    <a href="#" class="btn-icon hover:text-primary-600"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-xl glass flex items-center justify-center text-white/40 hover:text-primary-600 hover:border-primary-600/50 transition-all"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-xl glass flex items-center justify-center text-white/40 hover:text-primary-600 hover:border-primary-600/50 transition-all"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-xl glass flex items-center justify-center text-white/40 hover:text-primary-600 hover:border-primary-600/50 transition-all"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-xl glass flex items-center justify-center text-white/40 hover:text-primary-600 hover:border-primary-600/50 transition-all"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h4 class="text-lg font-bold mb-6">Viunganishi Haraka</h4>
+                <h4 class="text-white font-black italic tracking-widest uppercase text-sm mb-8">Quick Links</h4>
                 <ul class="space-y-4">
-                    <li><a href="/talents" class="text-white/60 hover:text-primary-600 transition">Tafuta Talents</a></li>
-                    <li><a href="/artists" class="text-white/60 hover:text-primary-600 transition">Tafuta Wasanii</a></li>
-                    <li><a href="/projects" class="text-white/60 hover:text-primary-600 transition">Miradi (Casting)</a></li>
-                    <li><a href="/services" class="text-white/60 hover:text-primary-600 transition">Huduma Zetu</a></li>
+                    <li><a href="/" class="text-white/40 hover:text-primary-600 font-bold transition-colors">Home</a></li>
+                    <li><a href="/talents" class="text-white/40 hover:text-primary-600 font-bold transition-colors">Talents</a></li>
+                    <li><a href="/artists" class="text-white/40 hover:text-primary-600 font-bold transition-colors">Artists</a></li>
+                    <li><a href="/about" class="text-white/40 hover:text-primary-600 font-bold transition-colors">About</a></li>
+                    <li><a href="/contact" class="text-white/40 hover:text-primary-600 font-bold transition-colors">Contact</a></li>
                 </ul>
             </div>
 
-            <!-- Company -->
+            <!-- For Talents -->
             <div>
-                <h4 class="text-lg font-bold mb-6">Kampuni</h4>
+                <h4 class="text-white font-black italic tracking-widest uppercase text-sm mb-8">For Talents</h4>
                 <ul class="space-y-4">
-                    <li><a href="/about" class="text-white/60 hover:text-primary-600 transition">Kuhusu Sisi</a></li>
-                    <li><a href="/contact" class="text-white/60 hover:text-primary-600 transition">Mawasiliano</a></li>
-                    <li><a href="/terms" class="text-white/60 hover:text-primary-600 transition">Vigezo na Masharti</a></li>
-                    <li><a href="/privacy" class="text-white/60 hover:text-primary-600 transition">Sera ya Faragha</a></li>
+                    <li><a href="/register" class="text-white/40 hover:text-primary-600 font-bold transition-colors">Become a Talent</a></li>
+                    <li><a href="#" class="text-white/40 hover:text-primary-600 font-bold transition-colors">Tips for Success</a></li>
+                    <li><a href="#" class="text-white/40 hover:text-primary-600 font-bold transition-colors">Portfolio Guide</a></li>
+                    <li><a href="#" class="text-white/40 hover:text-primary-600 font-bold transition-colors">Help Center</a></li>
                 </ul>
             </div>
 
-            <!-- Contact -->
-            <div>
-                <h4 class="text-lg font-bold mb-6">Mawasiliano</h4>
-                <ul class="space-y-4">
-                    <li class="flex items-start space-x-3 text-white/60">
-                        <i class="fas fa-map-marker-alt mt-1 text-primary-600"></i>
-                        <span>Dar es Salaam, Tanzania<br>Posta Mpya, Jengo la NHC</span>
-                    </li>
-                    <li class="flex items-center space-x-3 text-white/60">
-                        <i class="fas fa-phone text-primary-600"></i>
-                        <span>+255 700 000 000</span>
-                    </li>
-                    <li class="flex items-center space-x-3 text-white/60">
-                        <i class="fas fa-envelope text-primary-600"></i>
-                        <span>info@bongocasting.com</span>
-                    </li>
-                </ul>
+            <!-- Contact Info -->
+            <div class="space-y-6">
+                <h4 class="text-white font-black italic tracking-widest uppercase text-sm mb-8">Get In Touch</h4>
+                <div class="flex items-center space-x-4 group">
+                    <div class="w-10 h-10 rounded-lg glass flex items-center justify-center text-primary-600 group-hover:scale-110 transition-transform"><i class="fas fa-phone"></i></div>
+                    <span class="text-white/60 font-bold">+255 123 456 789</span>
+                </div>
+                <div class="flex items-center space-x-4 group">
+                    <div class="w-10 h-10 rounded-lg glass flex items-center justify-center text-primary-600 group-hover:scale-110 transition-transform"><i class="fas fa-envelope"></i></div>
+                    <span class="text-white/60 font-bold lowercase">info@bongocasting.co.tz</span>
+                </div>
+                <div class="flex items-center space-x-4 group">
+                    <div class="w-10 h-10 rounded-lg glass flex items-center justify-center text-primary-600 group-hover:scale-110 transition-transform"><i class="fas fa-globe"></i></div>
+                    <span class="text-white/60 font-bold lowercase">www.bongocasting.co.tz</span>
+                </div>
             </div>
         </div>
 
-        <div class="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-white/40 text-sm">
-            <p>&copy; {{ date('Y') }} BongoCasting. Haki zote zimehifadhiwa.</p>
-            <p>Imeundwa na <a href="#" class="text-white/60 hover:text-primary-600">Zerixa</a></p>
+        <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-white/30 text-sm font-bold tracking-widest">
+                © {{ date('Y') }} BONGOCASTING. ALL RIGHTS RESERVED.
+            </div>
+            <div class="flex items-center space-x-6 text-white/30 text-xs font-black italic uppercase tracking-widest">
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Cookies</a>
+            </div>
+            <div class="text-white/30 text-sm italic font-bold">
+                🇹🇿 Made in Tanzania with <span class="text-primary-600">❤️</span>
+            </div>
         </div>
     </div>
 </footer>
